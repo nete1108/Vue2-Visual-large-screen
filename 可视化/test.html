@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ECharts Scatter Plot</title>
+    <!-- 引入 ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+</head>
+<body>
+    <div id="scatter-plot" style="width: 800px; height: 600px;"></div>
+
+    <script>
+        // 数据
+        var data = [
+            // 在这里插入经过整理和分类的数据
+        ];
+
+        // 初始化 ECharts 实例
+        var scatterChart = echarts.init(document.getElementById('scatter-plot'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title: {
+                text: '散点图'
+            },
+            xAxis: {
+                type: 'category',
+                name: '学历',
+                nameLocation: 'middle',
+                nameTextStyle: {
+                    fontSize: 14
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '薪资',
+                nameLocation: 'middle',
+                nameTextStyle: {
+                    fontSize: 14
+                }
+            },
+            series: [{
+                data: data,
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[1]) / 5; // 根据薪资设置符号大小
+                },
+                label: {
+                    emphasis: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[0] + ' : ' + param.data[1]; // 设置标签显示内容
+                        },
+                        position: 'top'
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        opacity: 0.8
+                    }
+                }
+            }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表
+        scatterChart.setOption(option);
+
+    </script>
+</body>
+</html>
